@@ -1,0 +1,35 @@
+name: test rust-bitcoinkernel devshell
+
+on:
+  push:
+    branches: [setup-ci]
+  pull_request:
+
+jobs:
+  integration-test:
+    name: rust-bitcoinkernel (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+
+    steps:
+      - name: Checkout devazoa (this repo)
+        uses: actions/checkout@v4
+
+      - name: Clone rust-bitcoinkernel
+        run: |
+          git clone https://github.com/theCharlatan/rust-bitcoinkernel.git ../rust-bitcoinkernel
+
+      - name: Set up Nix
+        uses: cachix/install-nix-action@v24
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - name: Run cargo test inside devshell
+        working-directory: ../rust-bitcoinkernel
+        run: |
+          nix develop ../devazoa#rust-bitcoinkernel --command cargo test --all
+
