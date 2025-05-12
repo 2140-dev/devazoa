@@ -2,7 +2,6 @@ name: test rust-bitcoinkernel devshell
 
 on:
   push:
-    branches: [setup-ci]
   pull_request:
 
 jobs:
