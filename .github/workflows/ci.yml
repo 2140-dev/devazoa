@@ -18,8 +18,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Clone rust-bitcoinkernel
-        run: |
-          git clone https://github.com/theCharlatan/rust-bitcoinkernel.git ../rust-bitcoinkernel
+        with:
+          repository: josibake/rust-bitcoinkernel
+          ref: make-build-script-more-generic
+          path: ../rust-bitcoinkernel
 
       - name: Set up Nix
         uses: cachix/install-nix-action@v24
