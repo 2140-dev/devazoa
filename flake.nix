@@ -2,7 +2,7 @@
   description = "devazoa - a collection of bitcoin development environments";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/25.05";
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
